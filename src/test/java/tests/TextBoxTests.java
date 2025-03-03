@@ -38,22 +38,23 @@ public class TextBoxTests {
         $("#uploadPicture").uploadFromClasspath("images/image.jpg");
         $("#currentAddress").setValue("123 Main St");
         $("#state").click();
-        $(byText("NCR")).click();
+        $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
-        $(byText("Delhi")).click();
+        $("#stateCity-wrapper").$(byText("Delhi")).click();
         $("#submit").click();
 
         $(".modal-content").shouldBe(visible);
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
 
-        $x("//td[text()='Yana TS']").shouldHave(text("Yana TS"));
-        $x("//td[text()='YanaT@example.com']").shouldHave(text("YanaT@example.com"));
-        $x("//td[text()='1234567890']").shouldHave(text("1234567890"));
-        $x("//td[text()='03 September,1990']").shouldHave(text("03 September,1990"));
-        $x("//td[text()='Maths']").shouldHave(text("Maths"));
-        $x("//td[text()='Music']").shouldHave(text("Music"));
-        $x("//td[text()='image.jpg']").shouldHave(text("image.jpg"));
-        $x("//td[text()='123 Main St']").shouldHave(text("123 Main St"));
-        $x("//td[text()='NCR Delhi']").shouldHave(text("NCR Delhi"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Yana TS"));
+        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("YanaT@example.com"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("1234567890"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("03 September,1990"));
+        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Maths"));
+        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Music"));
+        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("image.jpg"));
+        $(".table-responsive").$(byText("Address")).parent().shouldHave(text("123 Main St"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
     }
 }
