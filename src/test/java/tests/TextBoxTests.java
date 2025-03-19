@@ -4,10 +4,10 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TextBoxTests {
 
@@ -56,5 +56,45 @@ public class TextBoxTests {
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("image.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text("123 Main St"));
         $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("NCR Delhi"));
+    }
+
+    @Test
+    void minimalFormTest() {
+        open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+
+        $("#firstName").setValue("Yana");
+        $("#lastName").setValue("TS");
+        $("#genterWrapper").$(byText("Female")).click();
+        $("#userNumber").setValue("1234567890");
+        $("#submit").click();
+
+        $(".modal-content").shouldBe(visible);
+        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Yana TS"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
+        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("1234567890"));
+    }
+
+    @Test
+    void negativeTest() {
+        open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+
+        $("#firstName").setValue("Yana");
+        $("#lastName").setValue("TS");
+        $("#genterWrapper").$(byText("Female")).click();
+        $("#userNumber").setValue("123");
+        $("#submit").click();
+
+        Boolean isInvalid = executeJavaScript(
+                "return document.querySelector('#userNumber').matches(':invalid');"
+        );
+        assertTrue(isInvalid != null && isInvalid, "Поле номера телефона должно быть невалидным");
+
+        $(".modal-content").shouldNotBe(visible);
     }
 }
