@@ -30,6 +30,10 @@ public class PracticeFormPage {
     // Методы для заполнения формы
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
+        return this;
+    }
+
+    public PracticeFormPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         return this;
