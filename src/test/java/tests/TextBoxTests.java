@@ -30,9 +30,14 @@ public class TextBoxTests extends TestBase {
                 .setStateAndCity("NCR", "Delhi")
                 .submitForm();
 
-        Attach.screenshotAs("FormScreenshot");
-        Attach.pageSource();
+        //noinspection unused
+        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
+//noinspection unused
+        byte[] _pageSource = Attach.pageSource();
         Attach.browserConsoleLogs();
+//noinspection unused
+        String _video = Attach.addVideo();
+
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", "Yana TS")
@@ -59,9 +64,14 @@ public class TextBoxTests extends TestBase {
                 .setPhoneNumber("1234567890")
                 .submitForm();
 
-        Attach.screenshotAs("MinimalFormScreenshot");
-        Attach.pageSource();
+        //noinspection unused
+        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
+//noinspection unused
+        byte[] _pageSource = Attach.pageSource();
         Attach.browserConsoleLogs();
+//noinspection unused
+        String _video = Attach.addVideo();
+
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", "Yana TS")
@@ -85,9 +95,14 @@ public class TextBoxTests extends TestBase {
         );
         assertTrue(isInvalid != null && isInvalid, "Поле номера телефона должно быть невалидным");
 
-        Attach.screenshotAs("NegativeTestScreenshot");
-        Attach.pageSource();
+        //noinspection unused
+        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
+//noinspection unused
+        byte[] _pageSource = Attach.pageSource();
         Attach.browserConsoleLogs();
+//noinspection unused
+        String _video = Attach.addVideo();
+
 
         $(".modal-content").shouldNotBe(visible);
     }

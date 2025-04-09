@@ -29,9 +29,15 @@ public class TextBoxWithFakerTests extends TestBase {
                 .setStateAndCity()
                 .submitForm();
 
-        Attach.screenshotAs("FakerFormScreenshot");
-        Attach.pageSource();
+
+        //noinspection unused
+        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
+//noinspection unused
+        byte[] _pageSource = Attach.pageSource();
         Attach.browserConsoleLogs();
+//noinspection unused
+        String _video = Attach.addVideo();
+
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", firstName + " " + lastName)

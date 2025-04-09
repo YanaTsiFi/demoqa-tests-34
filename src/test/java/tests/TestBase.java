@@ -32,10 +32,11 @@ public class TestBase {
     }
 
     @AfterEach
+    @SuppressWarnings("unused")
     void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
-        Attach.pageSource();
+        byte[] _screenshot = Attach.screenshotAs("Last screenshot");
+        byte[] _pageSource = Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+        String _video = Attach.addVideo();
     }
 }
