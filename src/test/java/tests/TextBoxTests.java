@@ -15,7 +15,9 @@ public class TextBoxTests extends TestBase {
     @Test
     void fillFormTest() {
         practiceFormPage.openPage()
-                .removeBanners()
+                .removeBanners();
+
+        practiceFormPage
                 .setFirstName("Yana")
                 .setLastName("TS")
                 .setEmail("YanaT@example.com")
@@ -45,7 +47,10 @@ public class TextBoxTests extends TestBase {
     @Test
     void minimalFormTest() {
         practiceFormPage.openPage()
-                .removeBanners()
+                .removeBanners();
+        // sleep(1000);
+
+        practiceFormPage
                 .setFirstName("Yana")
                 .setLastName("TS")
                 .setGender("Female")
@@ -61,7 +66,10 @@ public class TextBoxTests extends TestBase {
     @Test
     void negativeTest() {
         practiceFormPage.openPage()
-                .removeBanners()
+                .removeBanners();
+        // sleep(1000);
+
+        practiceFormPage
                 .setFirstName("Yana")
                 .setLastName("TS")
                 .setGender("Female")
