@@ -36,6 +36,7 @@ public class Attach {
         if (browserLogs.isEmpty()) {
             browserLogs = "No browser logs available";
         }
+        System.out.println("Browser Console Logs: " + browserLogs);
         attachAsText("Browser console logs", browserLogs);
     }
 
