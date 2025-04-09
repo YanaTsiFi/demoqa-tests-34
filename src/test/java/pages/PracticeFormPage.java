@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultTableComponent;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -37,8 +38,10 @@ public class PracticeFormPage {
     public PracticeFormPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())");
         return this;
     }
+
 
     public PracticeFormPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
@@ -100,7 +103,7 @@ public class PracticeFormPage {
     }
 
     public void submitForm() {
-        executeJavaScript("arguments[0].click();", submitButton);
+        submitButton.scrollIntoView(true).shouldBe(visible).click();
     }
 
     // Метод для проверки результатов
