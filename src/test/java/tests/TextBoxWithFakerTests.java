@@ -4,7 +4,6 @@ import pages.PracticeFormPageWithFaker;
 import pages.components.ResultTableComponent;
 import org.junit.jupiter.api.Test;
 import static tests.TestData.*;
-import helpers.Attach;
 
 public class TextBoxWithFakerTests extends TestBase {
 
@@ -28,15 +27,6 @@ public class TextBoxWithFakerTests extends TestBase {
                 .setCurrentAddress()
                 .setStateAndCity()
                 .submitForm();
-
-
-        //noinspection unused
-        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
-//noinspection unused
-        byte[] _pageSource = Attach.pageSource();
-        Attach.browserConsoleLogs();
-//noinspection unused
-        String _video = Attach.addVideo();
 
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();

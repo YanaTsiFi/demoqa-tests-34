@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import helpers.Attach;
 
 public class TextBoxTests extends TestBase {
 
@@ -29,14 +28,6 @@ public class TextBoxTests extends TestBase {
                 .setCurrentAddress("123 Main St")
                 .setStateAndCity("NCR", "Delhi")
                 .submitForm();
-
-        //noinspection unused
-        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
-//noinspection unused
-        byte[] _pageSource = Attach.pageSource();
-        Attach.browserConsoleLogs();
-//noinspection unused
-        String _video = Attach.addVideo();
 
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
@@ -64,15 +55,6 @@ public class TextBoxTests extends TestBase {
                 .setPhoneNumber("1234567890")
                 .submitForm();
 
-        //noinspection unused
-        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
-//noinspection unused
-        byte[] _pageSource = Attach.pageSource();
-        Attach.browserConsoleLogs();
-//noinspection unused
-        String _video = Attach.addVideo();
-
-
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", "Yana TS")
                 .checkResult("Gender", "Female")
@@ -94,14 +76,6 @@ public class TextBoxTests extends TestBase {
                 "return document.querySelector('#userNumber').matches(':invalid');"
         );
         assertTrue(isInvalid != null && isInvalid, "Поле номера телефона должно быть невалидным");
-
-        //noinspection unused
-        byte[] _screenshot = Attach.screenshotAs("FormScreenshot");
-//noinspection unused
-        byte[] _pageSource = Attach.pageSource();
-        Attach.browserConsoleLogs();
-//noinspection unused
-        String _video = Attach.addVideo();
 
 
         $(".modal-content").shouldNotBe(visible);
