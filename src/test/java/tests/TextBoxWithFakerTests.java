@@ -4,6 +4,7 @@ import pages.PracticeFormPageWithFaker;
 import pages.components.ResultTableComponent;
 import org.junit.jupiter.api.Test;
 import static tests.TestData.*;
+import helpers.Attach;
 
 public class TextBoxWithFakerTests extends TestBase {
 
@@ -27,6 +28,10 @@ public class TextBoxWithFakerTests extends TestBase {
                 .setCurrentAddress()
                 .setStateAndCity()
                 .submitForm();
+
+        Attach.screenshotAs("FakerFormScreenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
 
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", firstName + " " + lastName)
