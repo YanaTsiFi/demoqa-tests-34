@@ -18,6 +18,7 @@ public class Attach {
         ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
+
     @Attachment(value = "Page source", type = "text/plain")
     public static void pageSource() {
         getWebDriver().getPageSource();
