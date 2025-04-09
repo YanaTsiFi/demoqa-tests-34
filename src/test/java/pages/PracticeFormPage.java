@@ -35,13 +35,11 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage removeBanners() {
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())");
-        return this;
+    public void removeBanners() {
+        executeJavaScript("$('#fixedban').remove()"); // Удаляет рекламные баннеры
+        executeJavaScript("$('footer').remove()"); // Удаляет футер
+        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())"); // Удаляет все iframe
     }
-
 
     public PracticeFormPage setFirstName(String firstName) {
         firstNameInput.setValue(firstName);
@@ -106,7 +104,6 @@ public class PracticeFormPage {
         submitButton.scrollIntoView(true).shouldBe(visible).click();
     }
 
-    // Метод для проверки результатов
     public ResultTableComponent getResultTable() {
         return resultTableComponent;
     }

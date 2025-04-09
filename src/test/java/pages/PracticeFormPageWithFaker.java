@@ -34,10 +34,10 @@ public class PracticeFormPageWithFaker {
         return this;
     }
 
-    public PracticeFormPageWithFaker removeBanners() {
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        return this;
+    public void removeBanners() {
+        executeJavaScript("$('#fixedban').remove()"); // Удаляет рекламные баннеры
+        executeJavaScript("$('footer').remove()"); // Удаляет футер
+        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())"); // Удаляет все iframe
     }
 
     public PracticeFormPageWithFaker setFirstName() {

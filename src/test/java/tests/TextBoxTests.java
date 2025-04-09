@@ -3,7 +3,6 @@ package tests;
 import pages.PracticeFormPage;
 import pages.components.ResultTableComponent;
 import org.junit.jupiter.api.Test;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +15,6 @@ public class TextBoxTests extends TestBase {
     void fillFormTest() {
         practiceFormPage.openPage()
                 .removeBanners();
-
         practiceFormPage
                 .setFirstName("Yana")
                 .setLastName("TS")
@@ -48,7 +46,6 @@ public class TextBoxTests extends TestBase {
     void minimalFormTest() {
         practiceFormPage.openPage()
                 .removeBanners();
-        // sleep(1000);
 
         practiceFormPage
                 .setFirstName("Yana")
@@ -67,8 +64,6 @@ public class TextBoxTests extends TestBase {
     void negativeTest() {
         practiceFormPage.openPage()
                 .removeBanners();
-        // sleep(1000);
-
         practiceFormPage
                 .setFirstName("Yana")
                 .setLastName("TS")
