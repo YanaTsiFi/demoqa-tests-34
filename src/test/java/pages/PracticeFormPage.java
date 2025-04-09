@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultTableComponent;
+
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -99,7 +100,7 @@ public class PracticeFormPage {
     }
 
     public void submitForm() {
-        submitButton.click();
+        executeJavaScript("arguments[0].click();", submitButton);
     }
 
     // Метод для проверки результатов
