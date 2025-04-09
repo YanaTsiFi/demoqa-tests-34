@@ -31,13 +31,14 @@ public class Attach {
         System.out.println(message);
     }
 
-
     public static void browserConsoleLogs() {
-        attachAsText(
-                "Browser console logs",
-                String.join("\n", Selenide.getWebDriverLogs(BROWSER))
-        );
+        String browserLogs = String.join("\n", Selenide.getWebDriverLogs(BROWSER));
+        if (browserLogs.isEmpty()) {
+            browserLogs = "No browser logs available";
+        }
+        attachAsText("Browser console logs", browserLogs);
     }
+
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String addVideo() {
