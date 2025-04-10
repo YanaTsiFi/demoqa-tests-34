@@ -10,18 +10,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
+import static com.properties.ConfigProperties.*;
+
 public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
 
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browser.version", "120.0");
-        Configuration.browserSize = System.getProperty("browser.size", "1920x1080");
-        Configuration.remote = System.getProperty("REMOTE_URL", "https://user1:1234@selenoid.autotests.cloud/wd/hub");
-
-        Configuration.timeout = 10000;
+        Configuration.browser = browser();
+        Configuration.browserVersion = browserVersion();
+        Configuration.browserSize = browserSize();
+        Configuration.remote = remoteUrl();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.of(
@@ -34,11 +34,10 @@ public class TestBase {
     }
 
     @AfterEach
-    @SuppressWarnings("unused")
     void addAttachments() {
-        byte[] _screenshot = Attach.screenshotAs("Last screenshot");
-        byte[] _pageSource = Attach.pageSource();
+        Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
         Attach.browserConsoleLogs();
-        String _video = Attach.addVideo();
+        Attach.addVideo();
     }
 }
