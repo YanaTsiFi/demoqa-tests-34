@@ -7,28 +7,27 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.util.Map;
 
-import static com.properties.ConfigProperties.*;
-
 public class TestBase {
-
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
-        Configuration.browser = browser();
-        Configuration.browserVersion = browserVersion();
-        Configuration.browserSize = browserSize();
-        Configuration.remote = remoteUrl();
+        String remoteUrl = System.getProperty("remoteUrl");
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            Configuration.remote = remoteUrl;
+            Configuration.browser = System.getProperty("browser", "chrome");
+            Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            Configuration.browserCapabilities = capabilities;
+        }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
@@ -38,6 +37,9 @@ public class TestBase {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
-        Attach.addVideo();
+
+        if (Configuration.remote != null) {
+            Attach.addVideo();
+        }
     }
 }

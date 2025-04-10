@@ -28,7 +28,6 @@ public class TextBoxWithFakerTests extends TestBase {
                 .setStateAndCity()
                 .submitForm();
 
-
         ResultTableComponent resultTable = practiceFormPage.getResultTable();
         resultTable.checkResult("Student Name", firstName + " " + lastName)
                 .checkResult("Student Email", userEmail)

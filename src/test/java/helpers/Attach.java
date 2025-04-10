@@ -7,54 +7,45 @@ import org.openqa.selenium.TakesScreenshot;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 import static com.codeborne.selenide.Selenide.sessionId;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public class Attach {
-    @SuppressWarnings("unused")
     @Attachment(value = "{attachName}", type = "image/png")
-    public static byte[] screenshotAs(String attachName) {
-        return ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
+    public static void screenshotAs(String ignoredAttachName) {
+        ((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
+
 
     @Attachment(value = "Page source", type = "text/plain")
-    public static byte[] pageSource() {
-        return getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
+    public static void pageSource() {
+        getWebDriver().getPageSource();
     }
 
-    @SuppressWarnings("unused")
     @Attachment(value = "{attachName}", type = "text/plain")
-    public static void attachAsText(String attachName, String message) {
-        System.out.println(message);
+    public static void attachAsText(String ignoredAttachName, String ignoredMessage) {
     }
 
     public static void browserConsoleLogs() {
-        String browserLogs = String.join("\n", Selenide.getWebDriverLogs(BROWSER));
-        if (browserLogs.isEmpty()) {
-            browserLogs = "No browser logs available";
-        }
-        System.out.println("Browser Console Logs: " + browserLogs);
-        attachAsText("Browser console logs", browserLogs);
+        attachAsText(
+                "Browser console logs",
+                String.join("\n", Selenide.getWebDriverLogs(BROWSER))
+        );
     }
-
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
-    public static String addVideo() {
-        return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
-                + getVideoUrl()
-                + "' type='video/mp4'></video></body></html>";
+    public static void addVideo() {
+        getVideoUrl();
     }
 
-    public static URL getVideoUrl() {
+    public static void getVideoUrl() {
         String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
         try {
-            return new URL(videoUrl);
+            new URL(videoUrl);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 }
