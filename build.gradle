@@ -26,7 +26,20 @@ dependencies {
 
 test {
     useJUnitPlatform()
-}
+
+    test {
+        useJUnitPlatform()
+
+        test {
+            useJUnitPlatform()
+
+            systemProperty "browser", project.hasProperty('browser') ? project.browser : "chrome"
+            systemProperty "browser.version", project.hasProperty('browser.version') ? project.browser.version : "latest"
+            systemProperty "browser.size", project.hasProperty('browser.size') ? project.browser.size : "1920x1080"
+            systemProperty "SELENOID_URL", project.hasProperty('SELENOID_URL') ? project.SELENOID_URL : "http://localhost:4444/wd/hub"
+        }
+
+    }
 
 allure {
     report {
@@ -39,4 +52,5 @@ allure {
             }
         }
     }
+}
 }
