@@ -14,6 +14,9 @@ public class TestBase {
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.timeout = 10000;
+        Configuration.pageLoadTimeout = 30000;
+        Configuration.pageLoadStrategy = "eager";
 
         String remoteUrl = System.getProperty("remoteUrl");
         if (remoteUrl != null && !remoteUrl.isEmpty()) {
@@ -24,7 +27,8 @@ public class TestBase {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(
                     "enableVNC", true,
-                    "enableVideo", true
+                    "enableVideo", true,
+                    "enableLog", true
             ));
             Configuration.browserCapabilities = capabilities;
         }
