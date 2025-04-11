@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultTableComponent;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -29,6 +28,15 @@ public class PracticeFormPage {
     private final CalendarComponent calendarComponent = new CalendarComponent();
     private final ResultTableComponent resultTableComponent = new ResultTableComponent();
 
+    // Новый метод для безопасного клика
+    private void safeClick(SelenideElement element) {
+        executeJavaScript(
+                "arguments[0].scrollIntoView({block: 'center'});" +
+                        "arguments[0].click();",
+                element
+        );
+    }
+
     // Методы для заполнения формы
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
@@ -36,9 +44,9 @@ public class PracticeFormPage {
     }
 
     public void removeBanners() {
-        executeJavaScript("$('#fixedban').remove()"); // Удаляет рекламные баннеры
-        executeJavaScript("$('footer').remove()"); // Удаляет футер
-        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())"); // Удаляет все iframe
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
+        executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())");
     }
 
     public PracticeFormPage setFirstName(String firstName) {
@@ -100,8 +108,9 @@ public class PracticeFormPage {
         return this;
     }
 
+    // Изменённый метод - теперь использует safeClick
     public void submitForm() {
-        submitButton.scrollIntoView(true).shouldBe(visible).click();
+        safeClick(submitButton);
     }
 
     public ResultTableComponent getResultTable() {

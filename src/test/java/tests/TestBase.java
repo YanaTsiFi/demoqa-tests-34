@@ -2,7 +2,6 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -52,12 +51,15 @@ public class TestBase {
 
     @BeforeEach
     void setUp() {
-        // Очистка состояния перед каждым тестом
-        if (WebDriverRunner.hasWebDriverStarted()) {
-            Selenide.clearBrowserCookies();
-            Selenide.clearBrowserLocalStorage();
-            Selenide.executeJavaScript("sessionStorage.clear();");
-        }
+        // Удаляем все возможные мешающие элементы перед каждым тестом
+        Selenide.executeJavaScript(
+                "document.querySelectorAll('#fixedban, footer, .ads').forEach(el => el.remove());" +
+                        "document.body.style.paddingBottom = '0';" +
+                        "window.scrollTo(0,0);"
+        );
+
+        // Принудительная прокрутка к началу страницы
+        Selenide.executeJavaScript("window.scrollTo(0, 0)");
     }
 
     @AfterEach
