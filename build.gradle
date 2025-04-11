@@ -26,7 +26,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    systemProperties(System.getProperties())
+    systemProperties(
+            "browser": System.getProperty("browser", "chrome"),
+            "browserVersion": System.getProperty("browserVersion", "128.0"),
+            "browserSize": System.getProperty("browserSize", "1920x1080"),
+            "remoteUrl": System.getProperty("remoteUrl")
+    )
 }
 
 allure {
