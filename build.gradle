@@ -10,7 +10,7 @@ repositories {
 def allureVersion = "2.21.0"
 
 dependencies {
-    testImplementation("com.codeborne:selenide:7.0.4") {
+    testImplementation("com.codeborne:selenide:7.2.1") {
         exclude group: 'org.yaml', module: 'snakeyaml'
     }
     testImplementation('com.github.javafaker:javafaker:1.0.2') {
