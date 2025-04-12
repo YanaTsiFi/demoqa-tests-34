@@ -38,7 +38,6 @@ public class TestBase {
 
     @AfterEach
     void addAttachments() {
-        // Все методы Attach теперь вызываются без предупреждений
         Attach.screenshotAs("Screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
