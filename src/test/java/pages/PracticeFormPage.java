@@ -100,7 +100,7 @@ public class PracticeFormPage {
 
     public void submitForm() {
         executeJavaScript(
-                "arguments[0].scrollIntoView({block: 'center'});" +
+                "arguments[0].scrollIntoView({block: 'center', behavior: 'instant'});" +
                         "arguments[0].click();",
                 submitButton
         );
