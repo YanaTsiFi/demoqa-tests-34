@@ -12,9 +12,6 @@ public class TextBoxWithFakerTests extends TestBase {
     @Test
     void fillFormTest() {
         practiceFormPage.openPage()
-                .removeBanners();
-
-        practiceFormPage
                 .setFirstName()
                 .setLastName()
                 .setEmail()

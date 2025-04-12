@@ -16,21 +16,19 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 30000;
         Configuration.pageLoadStrategy = "normal";
         Configuration.remoteReadTimeout = 60000;
         Configuration.remoteConnectionTimeout = 60000;
-
-        // Важная настройка для стабильности
         Configuration.reopenBrowserOnFail = true;
 
         String remoteUrl = System.getProperty("remoteUrl");
         if (remoteUrl != null && !remoteUrl.isEmpty()) {
             Configuration.remote = remoteUrl;
-            Configuration.browser = System.getProperty("browser", "chrome");
-            Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
 
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.of(
@@ -51,20 +49,11 @@ public class TestBase {
 
     @BeforeEach
     void setUp() {
-        // Удаляем все возможные мешающие элементы перед каждым тестом
-        Selenide.executeJavaScript(
-                "document.querySelectorAll('#fixedban, footer, .ads').forEach(el => el.remove());" +
-                        "document.body.style.paddingBottom = '0';" +
-                        "window.scrollTo(0,0);"
-        );
-
-        // Принудительная прокрутка к началу страницы
-        Selenide.executeJavaScript("window.scrollTo(0, 0)");
+        // Перенесено в openPage()
     }
 
     @AfterEach
     void addAttachments() {
-        // Даем время для завершения операций
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
@@ -78,5 +67,10 @@ public class TestBase {
         if (Configuration.remote != null) {
             Attach.addVideo();
         }
+    }
+
+    @AfterEach
+    void tearDown() {
+        Selenide.closeWebDriver();
     }
 }

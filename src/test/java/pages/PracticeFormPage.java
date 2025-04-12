@@ -4,12 +4,11 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.ResultTableComponent;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class PracticeFormPage {
-
-    // Элементы формы
     private final SelenideElement firstNameInput = $("#firstName");
     private final SelenideElement lastNameInput = $("#lastName");
     private final SelenideElement userEmailInput = $("#userEmail");
@@ -24,22 +23,13 @@ public class PracticeFormPage {
     private final SelenideElement cityInput = $("#city");
     private final SelenideElement submitButton = $("#submit");
 
-    // Компоненты
     private final CalendarComponent calendarComponent = new CalendarComponent();
     private final ResultTableComponent resultTableComponent = new ResultTableComponent();
 
-    // Новый метод для безопасного клика
-    private void safeClick(SelenideElement element) {
-        executeJavaScript(
-                "arguments[0].scrollIntoView({block: 'center'});" +
-                        "arguments[0].click();",
-                element
-        );
-    }
-
-    // Методы для заполнения формы
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
+        removeBanners();
+        $("#firstName").shouldBe(visible);
         return this;
     }
 
@@ -108,9 +98,12 @@ public class PracticeFormPage {
         return this;
     }
 
-    // Изменённый метод - теперь использует safeClick
     public void submitForm() {
-        safeClick(submitButton);
+        executeJavaScript(
+                "arguments[0].scrollIntoView({block: 'center'});" +
+                        "arguments[0].click();",
+                submitButton
+        );
     }
 
     public ResultTableComponent getResultTable() {
