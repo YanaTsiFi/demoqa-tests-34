@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "Some project name",
+    "environment": "qa.guru",
+    "comment": "comment here @iterkin",
+    "reportLink": "https://jenkins.autotests.cloud/job/YanaTsiFi-demoqa-tests-34_jenkins/57/",
+    "language": "en",
+    "allureFolder": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\15836533303872070265\\allure-report",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "7772654938:AAFXI9oPn09e0Gh7zd4JIod4pVQCUXxnIbA",
+    "chat": "-1002514457760",
+    "replyTo": ""
+  }
+}
