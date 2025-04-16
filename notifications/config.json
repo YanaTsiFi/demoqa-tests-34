@@ -5,7 +5,7 @@
     "comment": "comment here @iterkin",
     "reportLink": "https://jenkins.autotests.cloud/job/YanaTsiFi-demoqa-tests-34_jenkins/57/",
     "language": "en",
-    "allureFolder": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\15836533303872070265\\allure-report",
+    "allureFolder": "allure-report",
     "enableChart": true
   },
   "telegram": {
