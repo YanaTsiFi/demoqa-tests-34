@@ -33,10 +33,11 @@ public class PracticeFormPage {
         return this;
     }
 
-    public void removeBanners() {
+    public PracticeFormPage removeBanners() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
         executeJavaScript("document.querySelectorAll('iframe').forEach(el => el.remove())");
+        return this;
     }
 
     public PracticeFormPage setFirstName(String firstName) {
